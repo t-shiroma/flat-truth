@@ -6,6 +6,9 @@ on:
     branches:
       - release
 
+permissions:
+  contents: write
+
 jobs:
   create-release-tag:
     # PRがマージされたときのみ実行
