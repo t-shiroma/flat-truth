@@ -27,7 +27,7 @@ jobs:
           git tag $TAG_NAME
 
       - name: タグをプッシュ
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACTIONS_TOKEN }}
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.ACTIONS_TOKEN }}
         run: |
           git push origin $TAG_NAME
