@@ -1,0 +1,31 @@
+name: Create Tag on Release Branch Push
+
+on:
+  push:
+    branches:
+      - release
+
+jobs:
+  create_tag:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: コードをチェックアウト
+        uses: actions/checkout@v3
+
+      - name: Gitユーザーを設定
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: タグを作成
+        id: create_tag
+        run: |
+          TAG_NAME="release-$(date +'%Y%m%d%H%M%S')"
+          git tag $TAG_NAME
+
+      - name: タグをプッシュ
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.ACTIONS_TOKEN }}
+          tags: true
