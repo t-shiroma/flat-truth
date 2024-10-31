@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: コードをチェックアウト
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # タグの作成とプッシュのために完全な履歴が必要
 
       - name: Gitユーザーを設定
         run: |
@@ -25,7 +27,7 @@ jobs:
           git tag $TAG_NAME
 
       - name: タグをプッシュ
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.ACTIONS_TOKEN }}
-          tags: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACTIONS_TOKEN }}
+        run: |
+          git push origin $TAG_NAME
