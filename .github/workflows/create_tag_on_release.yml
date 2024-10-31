@@ -5,6 +5,9 @@ on:
     branches:
       - release
 
+permissions:
+  contents: write
+
 jobs:
   create_tag:
     runs-on: ubuntu-latest
@@ -17,8 +20,8 @@ jobs:
 
       - name: Gitユーザーを設定
         run: |
-          git config --global user.name 'tomiya shiroma'
-          git config --global user.email 't-shiroma@ryussystem.co.jp'
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
       - name: タグを作成
         id: create_tag
@@ -27,7 +30,5 @@ jobs:
           git tag $TAG_NAME
 
       - name: タグをプッシュ
-        # env:
-        #   GITHUB_TOKEN: ${{ secrets.ACTIONS_TOKEN }}
         run: |
           git push origin $TAG_NAME
