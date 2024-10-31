@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: コードをチェックアウト
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0  # タグの作成とプッシュのために完全な履歴が必要
 
